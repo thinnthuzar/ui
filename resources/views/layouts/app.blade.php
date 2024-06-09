@@ -73,7 +73,23 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            @auth
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        @include('aside')
+                    </div>
+                    <div class="col-lg-9">
+                        @yield('content')
+                    </div>
+                </div>
+
+            </div>
+            @endauth
+            @guest
+                @yield('content')
+            @endguest
+
         </main>
     </div>
 </body>

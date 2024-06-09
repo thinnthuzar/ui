@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::latest("id")->get();
+        return view('category.index',compact('categories'));
     }
 
     /**
@@ -25,18 +27,25 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('category.index');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCategoryRequest  $request
+    * @param  \App\Http\Requests\StoreCategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+       // return $request;
+        $category = new Category();
+        $category->title= $request->title;
+        $category->description = $request->description;
+        $category->save();
+       // return $request;
+        return redirect()->route('category.index')->with('status',$category->title. " added successfully");
+
     }
 
     /**
@@ -47,7 +56,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+
     }
 
     /**
@@ -57,8 +66,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
+
     {
-        //
+        return view('category.edit',compact('category'));
     }
 
     /**
@@ -70,7 +80,16 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+
+        $category->title = $request->title;
+        $category->description = $request->description;
+       // $category->slug = Str::slug($request->title);
+        // $category->user_id = Auth::id();
+        $category->update();
+        return redirect()->route('category.index')
+        ->with('status', $request->title." update is successfully");
+
+        //return view('categoryedit',compact('category'));
     }
 
     /**
@@ -81,6 +100,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $title=$category->title;
+        $category->delete();
+        return redirect()->back();
+       // return redirect()->route('category.index')->with('status',$title . "deleted successfully" );
     }
 }

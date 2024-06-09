@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -14,8 +15,9 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {    $products = Product::latest("id")->paginate(3);
+        return view('product.index',compact('products'));
+
     }
 
     /**
@@ -25,7 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('product.create');
     }
 
     /**
@@ -36,7 +38,22 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        $product = new Product();
+//$category=Category::all();
+       $product->name= $request->name;
+       $product->category_id= $request->category;
+       $product->description = $request->description;
+
+       $product->price= $request->price;
+       $product->stock = $request->stock;
+       $image=$request->image;
+       $imageName=time().'.'.$image->getClientOriginalExtension();
+        $request->image->move('productImg',$imageName);
+        $product->image=$imageName;
+       $product->save();
+
+       // return $request;
+        return redirect()->route('product.index')->with('status',$product->title. " added successfully");
     }
 
     /**
@@ -58,7 +75,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('product.edit',compact('product'));
     }
 
     /**
@@ -69,8 +86,28 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateProductRequest $request, Product $product)
-    {
-        //
+    {   $category =new Category();
+        $product->name= $request->name;
+        $product->category_id= $request->category;
+       // $product->category_id= $category->title;
+        $product->description = $request->description;
+        $product->price= $request->price;
+        $product->stock = $request->stock;
+
+        $image=$request->image;
+        if ($image) {
+            $imageName=time().'.'.$image->getClientOriginalExtension();
+            $request->image->move('productImg',$imageName);
+            $product->image=$imageName;
+        } else {
+            $product->image=$product->image;
+        }
+
+
+       // $product->image=$request->image;
+        $product->update();
+        // return $request;
+         return redirect()->route('product.index')->with('status',$product->name. " added successfully");
     }
 
     /**
@@ -81,6 +118,23 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $productName=$product->name;
+        $product->delete();
+        return redirect()->route('product.index')->with('status',$productName . " deleted successfully" );
+    }
+    public function webProduct()
+    {    $products = Product::latest("id")->paginate(1);
+        return view('website.index',compact('products'));
+
+    }
+    public function pshow()
+    {    $product = Product::latest("id")->paginate(1);
+        return view('website.products',compact('product'));
+
+    }
+    public function parrivals()
+    {    $product = Product::take(5)->get();
+        return view('website.warrival',compact('product'));
+
     }
 }
