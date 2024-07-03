@@ -21,27 +21,30 @@ use Illuminate\Support\Facades\Auth;
 */
 
 // Route::get('/', function () {
-//     return view('welcome');
+//     return view('website.index');
 // });
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/redirect', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'homes'])->middleware(['auth', 'verified'])->name('homes');
 Auth::routes();
 Route::get('/dashboad', [App\Http\Controllers\OwnerController::class, 'dashboad'])->name('dashboad');
 
 Route::get('/test', [App\Http\Controllers\HomeController::class, 'test'])->name('test');
 Route::get('/category', [App\Http\Controllers\CategoryController::class, 'index'])->name('category');
 Route::resource('/category', CategoryController::class);
-Route::resource('/admin',OwnerController::class);
+
+Route::get('/remove_cart/{id}', [App\Http\Controllers\CartController::class, 'destroy'])->name('cart');
 Route::get('/admin', [App\Http\Controllers\OwnerController::class, 'index'])->name('admin');
 Route::resource('/product', ProductController::class);
+Route::resource('/cart', CartController::class);
 Route::get('/product', [App\Http\Controllers\ProductController::class, 'index'])->name('product.index');
 Route::get('/pshow', [App\Http\Controllers\ProductController::class, 'pshow'])->name('pshow');
+Route::get('/webProduct', [App\Http\Controllers\ProductController::class, 'webProduct'])->name('webProduct');
 Route::get('/parrivals', [App\Http\Controllers\ProductController::class, 'parrivals'])->name('parrivals');
 Route::post('/addTocart/{id}', [App\Http\Controllers\HomeController::class, 'addTocart'])->name('addTocart');
 Route::get('/details/{id}', [App\Http\Controllers\HomeController::class, 'details'])->name('details');
-Route::get('/remove_cart/{id}', [App\Http\Controllers\HomeController::class, 'remove_cart'])->name('remove_cart');
+Route::post('/remove_cart/{id}', [App\Http\Controllers\HomeController::class, 'remove_cart'])->name('remove_cart');
 Route::get('/showCart', [App\Http\Controllers\CartController::class, 'showCart'])->name('showCart');
-Route::get('/order', [App\Http\Controllers\HomeController::class, 'order'])->name('order');
+Route::post('/order', [App\Http\Controllers\HomeController::class, 'order'])->name('order');
 Route::get('/showOrder', [App\Http\Controllers\AdminController::class, 'showOrder'])->name('showOrder');
 Route::resource('payment', PaymentController::class);
 Route::post('/addPayment', [App\Http\Controllers\HomeController::class, 'addPayment'])->name('addPayment');
@@ -53,3 +56,10 @@ Route::get('/index', [App\Http\Controllers\OwnerController::class, 'index'])->na
 Route::get('/ordersByWeek', [App\Http\Controllers\OrderController::class, 'ordersByWeek'])->name('ordersByWeek');
 Route::get('/revenueByDay', [App\Http\Controllers\OrderController::class, 'revenueByDay'])->name('revenueByDay');
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
+
+Route::get('/bill', [App\Http\Controllers\HomeController::class, 'bill'])->name('bill');
+
+// Route::middleware(['auth', 'redirect-role'])->group(function () {
+//     Route::get('/dashboad', [App\Http\Controllers\OwnerController::class,'dashboad'])->name('dashboad');
+
+// });

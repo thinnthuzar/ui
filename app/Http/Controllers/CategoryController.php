@@ -41,7 +41,7 @@ class CategoryController extends Controller
        // return $request;
         $category = new Category();
         $category->title= $request->title;
-        $category->description = $request->description;
+        //$category->description = $request->description;
         $category->save();
        // return $request;
         return redirect()->route('category.index')->with('status',$category->title. " added successfully");

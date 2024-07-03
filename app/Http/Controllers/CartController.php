@@ -16,9 +16,12 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $product = Product::all();
-        return view('website.products',compact('product'));
+    {   $user=Auth::user();
+        $cart = Cart::where('user_id','=',$user->id)->get();
+        return view('website.cart', ['cart' => $cart]);
+        // $product = Product::all();
+        // $cart=cart::all();
+        // return view('website.products',compact('product'));
     }
 
     /**
@@ -89,14 +92,14 @@ class CartController extends Controller
         if(Auth::id()){
             $user=Auth::user();
 
-            $product=Product::find($id);
+            $product=Product::find($user->id);
             dd($product);
             $cart=new cart;
             $cart->user_name=$user->name;
             $cart->product_title=$product->name;
             $cart->quantity=$request->quantity;
             $cart->save();
-            return view('website.cart')->with('status', "cad is add");
+            return view('website.cart')->with('status', "card is add");
         }
         else{
         return view('login');
@@ -113,6 +116,7 @@ class CartController extends Controller
      */
     public function destroy(cart $cart)
     {
-        //
+        $cart->delete();
+        return redirect()->back();
     }
 }

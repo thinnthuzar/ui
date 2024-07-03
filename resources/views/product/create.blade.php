@@ -30,7 +30,7 @@
 
             <div class="form-group  d-flex">
                 <label for="">Stock</label>
-                <input type="text" name="stock" class="ml-3 form-control">
+                <input type="number" name="stock" class="ml-3 form-control">
             </div>
             <div class="form-group  d-flex">
                 <label for="">Price</label>

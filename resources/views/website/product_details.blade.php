@@ -5,9 +5,7 @@
  <!-- header section strats -->
  @include('website.header')
  <!-- end header section -->
-  <!-- slider section -->
-  @include('website.sidebar')
-  <!-- end slider section -->
+  
     @if (session('status'))
     <div class="alert alert-success">
         {{session('status')}}

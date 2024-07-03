@@ -11,9 +11,10 @@
 @include('website.featuer')
 <!--end why section -->
 <!-- arrival section -->
- @include('website.arrival')
+
 <!-- arrival section -->
  <!-- product section -->
+
  <section class="product_section layout_padding">
     <div class="container">
        <div class="heading_container heading_center">
@@ -58,9 +59,9 @@
         @endforelse
 
 
-        <div class="m-2 ">
+        {{-- <div class="m-2 ">
             {{$product->onEachSide(1)->links()}}
-        </div>
+        </div> --}}
 
 
        </div>

@@ -60,7 +60,7 @@
                             @endforelse
                         </tbody>
                     </table>
-                    {{$products->onEachside(1)->links()}}
+                    {{-- {{$products->onEachside(1)->links()}} --}}
 
                 </div>
             </div>

@@ -1,11 +1,16 @@
-
+<!-- link section strats -->
+@include('website.style')
+ <!-- end header section -->
+ <!-- header section strats -->
+ @include('website.header')
+ <!-- end header section -->
 
 <section class="client_section layout_padding">
     <div class="container">
        <div class="heading_container heading_center">
           <h2>New Arrivals</h2>
 <div class="row">
-    
+
  @foreach ($product as $p)
     <div class="col-md-3 m-3 card d-block">
         <h4 class="pt-2">{{$p->name}}</h4>

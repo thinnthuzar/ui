@@ -86,13 +86,15 @@ class AdminController extends Controller
         //
     }
     public function showOrder(){
-        $order=Order::when(request('message'),function($q){
-            $message=request("message");
-            $q->where("user_name","like","%$message%")
-            ->orWhere("product_title","like","%$message%");
-        })->paginate(5);
+        $order=Order::all();
+        // $order=Order::when(request('message'),function($q){
+        //     $message=request("message");
+        //     $q->where("user_name","like","%$message%")
+        //     ->orWhere("product_title","like","%$message%");
+        // })->latest('id')->get();
+        //->paginate(5);
             return view('order',compact('order'));
-            
+
         }
 
         public function showUser(){

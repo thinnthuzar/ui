@@ -19,7 +19,7 @@ return new class extends Migration
             $table->String("name");
             $table->longText("description");
             $table->String("image");
-            $table->decimal("price");
+            $table->bigInteger("price");
             $table->integer("stock");
             $table->foreignId("category_id")->constrained()->cascadeOnDelete();
             //$table->foreignId("user_id")->constrained()->cascadeOnDelete();

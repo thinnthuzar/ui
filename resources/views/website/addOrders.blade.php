@@ -5,9 +5,7 @@
  <!-- header section strats -->
  @include('website.header')
  <!-- end header section -->
-  <!-- slider section -->
-  @include('website.sidebar')
-  <!-- end slider section -->
+
 <!-- order section -->
     <div class="container ">
         <div class="row">
@@ -20,29 +18,20 @@
             <div class="col col-md-6">
                 <h3>User Form</h3>
                 <div class="p-3" style="border: 2px solid rgb(192, 192, 247)">
-                    <form action="{{route('showOrder')}}" method="post">
+                    <form action="{{route('order')}}" method="post">
                         @csrf
-                        <div class="form-group m-0 p-0 p-0">
-                            <label for="">Address</label>
-                            <input type="text" name="address" class="form-control">
-                        </div>
-                        <div class="form-group m-0 p-0 p-0">
-                            <label for="">Phone</label>
-                            <input type="number" name="phone" class="form-control">
-                        </div>
+                       
+                       
                         <div class="form-group m-0 p-0 p-0">
                             <label for="">Amount</label>
-                            <input type="number" name="amount" class="form-control">
+                            <input type="number" name="amount" value="$total" class="form-control">
                         </div>
 
 
 
                         <div class="form-group  d-flex">
                             <label for="">Select Payment</label>
-
-
-
-                            <select id="category" name="category" class="form-control">
+                            <select id="payment" name="payment" class="form-control">
                                 @foreach (\App\Models\Payment::all() as $c )
                                  <option value="{{$c->id}}">{{$c->payment_type}}</option>
                                  @endforeach

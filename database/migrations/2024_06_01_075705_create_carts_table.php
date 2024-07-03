@@ -19,10 +19,10 @@ return new class extends Migration
             $table->String("product_id")->constrained()->casdeonDelete();
             $table->String("user_id")->constrained()->casdeonDelete();
             $table->String("email");
-            $table->String("product_title");
-            $table->String("price");
+           // $table->String("product_title");
+           // $table->String("price");
             $table->String("quantity");
-            $table->String("image");
+           // $table->String("image");
             $table->timestamps();
         });
     }

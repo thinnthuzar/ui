@@ -12,12 +12,12 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
              <ul class="navbar-nav">
                 <li class="nav-item active">
-                   <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+                   <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
                 </li>
                <li class="nav-item dropdown">
                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Pages <span class="caret"></span></a>
                    <ul class="dropdown-menu">
-                      <li><a href="about.html">About</a></li>
+                      <li><a href="{{route('parrivals')}}">About</a></li>
                       <li><a href="testimonial.html">Testimonial</a></li>
                    </ul>
                 </li>
@@ -113,6 +113,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
+
+                            <a href="{{ route('home') }}">hhh</a>
+
                     @endif
 
                     @if (Route::has('register'))
@@ -125,6 +128,7 @@
                         <a id="" class="nav-link " href="#" role="button" data-bs-toggle="" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </a>
+
                     </h5>
             <div class="  text-black" style="padding-top: 5%;">
                             <a class="-item" href="{{ route('logout') }}"

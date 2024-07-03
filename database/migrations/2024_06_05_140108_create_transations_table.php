@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('transations', function (Blueprint $table) {
             $table->id();
             $table->foreignId("user_id")->constrained()->cascadeOnDelete();
-            $table->foreignId("cart_id");
+          //  $table->foreignId("cart_id");
             $table->integer("amount");
             $table->string("payment");
             $table->timestamps();

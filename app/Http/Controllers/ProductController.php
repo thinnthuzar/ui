@@ -15,7 +15,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {    $products = Product::latest("id")->paginate(3);
+    {    $products = Product::all();//->paginate(3);
         return view('product.index',compact('products'));
 
     }
@@ -64,7 +64,10 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        $product = Product::all();//->paginate(3);
+
+        return view('website.index',compact('product'));
+
     }
 
     /**
@@ -123,18 +126,21 @@ class ProductController extends Controller
         return redirect()->route('product.index')->with('status',$productName . " deleted successfully" );
     }
     public function webProduct()
-    {    $products = Product::latest("id")->paginate(1);
+    {    $products = Product::all();//->paginate(3);
+
         return view('website.index',compact('products'));
 
     }
     public function pshow()
-    {    $product = Product::latest("id")->paginate(1);
+    {    $product = Product::all();
         return view('website.products',compact('product'));
 
     }
     public function parrivals()
-    {    $product = Product::take(5)->get();
-        return view('website.warrival',compact('product'));
+    {
+         // $product = Product::take(5)->get();
+        $product = Product::latest('id')->get();
+        return view('website.arrival',compact('product'));
 
     }
 }

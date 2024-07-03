@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->String("user_name");
+           // $table->String("user_name");
             $table->String("transaction_id")->constrained()->casdeonDelete();
             $table->String("product_id");
             $table->String("user_id")->constrained()->casdeonDelete();
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->String("phone");
             $table->String("address");
 
-            $table->String("price");
+            $table->bigInteger("price");
             $table->String("quantity");
             $table->String("image");
 

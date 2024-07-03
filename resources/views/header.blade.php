@@ -25,7 +25,7 @@ body {
 /* Dark mode styles */
 body.dark-mode {
     background-color: black;
-    color: black;
+    color: ;
 }
 .aside a:active{
     background-color: white;

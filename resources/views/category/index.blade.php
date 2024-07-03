@@ -28,10 +28,7 @@
             @error('title') is-invalid @enderror ">
 
            </div>
-          <div class="form-group mb-0 mr-3">
-            <label for="">Description</label>
-            <input type="text" name="description"   class="form-control">
-          </div>
+          
 
             @error('title')
             <div class="invalid-feedback">{{$message}}</div>

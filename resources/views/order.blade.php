@@ -24,23 +24,25 @@
                     @forelse ($order as $o)
                     <tr>
                         <td>{{$o->id}}</td>
-                        <td>{{$o->user_name}}</td>
+                        <td>{{$o->user->name}}</td>
                         <td>{{$o->email}}</td>
                         <td>{{$o->phone}}</td>
-                        <td>{{$o->product_title}}</td>
+
+                        <td>{{optional($o->product)->name}}</td>
                         <td>{{$o->price}}</td>
                         <td>{{$o->quantity}}</td>
                         <td><img src="productImg/{{$o->image}}" class="w-50" alt=""></td>
 
                         <td>{{$o->created_at->format('d/m/Y')}}</td>
                     </tr>
+              {{-- <?php dd($o->product->name);?> --}}
                     @empty
                         <p>There is no order</p>
                     @endforelse
 
                 </tbody>
             </table>
-            {{$order->onEachside(1)->links()}}
+            {{-- {{$order->onEachside(1)->links()}} --}}
         </div>
     </div>
 </div>
